@@ -7,5 +7,5 @@ RUN mvn clean package -DskipTests
 # 2단계: 실행 전용 컨테이너
 FROM openjdk:8-jdk-alpine
 WORKDIR /app
-COPY --from=build /app/target/lolTest.war /app/lolTest.war
-CMD ["java", "-jar", "/app/lolTest.war"]
+COPY --from=build /app/target/lolTest.war /app/lolTest-0.0.1-SNAPSHOT.war
+CMD ["java", "-jar", "/app/lolTest-0.0.1-SNAPSHOT.war"]

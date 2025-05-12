@@ -1,8 +1,11 @@
-# OpenJDK 기반 이미지 사용
-FROM openjdk:8-jdk
+# 1단계: Maven + Java 8으로 빌드
+FROM maven:3.6.3-jdk-8 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# WAR 파일을 컨테이너 내부로 복사
-COPY target/my-app.war /app/lolTest.war
-
-# 애플리케이션 실행
+# 2단계: 실행 전용 컨테이너
+FROM openjdk:8-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/target/lolTest.war /app/lolTest.war
 CMD ["java", "-jar", "/app/lolTest.war"]

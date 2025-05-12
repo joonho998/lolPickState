@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('LOL Draft List')"></head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/simulationList.css}" />
+<script th:src="@{/js/simulation/simulationList.js}"></script>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class="container">
+        <h1>벤픽 시뮬레이션 리스트</h1>
+		<form id="dataForm" action="/simulations/detail" method="post">
+        	<input type="hidden" id="simulationId" name="simulationId" value="">
+		</form>
+        <ul class="simulation-list">
+            <th:block th:each="simulationSet : ${simulationSets}">
+                <li class="simulation-item">
+                    <a href="javascript:void(0);" class="simulation-title" th:data-simulation-id="${simulationSet.simulationId}">
+	                    <span class="simulation-date" th:text="${simulationSet.date}">2025-05-09</span>
+	                    <span class="simulation-total" th:text="${simulationSet.totalSets} + '세트'">3세트</span>
+                	</a>
+
+                    <div class="simulation-detail">
+                        <div class="bans">
+                            <div class="blue-bans">
+                                <h4>블루팀 벤픽</h4>
+                                <ul>
+                                    <th:block th:each="champ : ${simulationSet.blueBans}">
+                                        <li>
+                                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" alt="벤픽 이미지">
+                                        </li>
+                                    </th:block>
+                                </ul>
+                            </div>
+
+                            <div class="red-bans">
+                                <h4>레드팀 벤픽</h4>
+                                <ul>
+                                    <th:block th:each="champ : ${simulationSet.redBans}">
+                                        <li>
+                                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" alt="벤픽 이미지">
+                                        </li>
+                                    </th:block>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="picks">
+                            <div class="blue-picks">
+                                <h4>블루팀 픽</h4>
+                                <ul>
+                                    <th:block th:each="champ : ${simulationSet.bluePicks}">
+                                        <li>
+                                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" alt="픽 이미지">
+                                        </li>
+                                    </th:block>
+                                </ul>
+                            </div>
+
+                            <div class="red-picks">
+                                <h4>레드팀 픽</h4>
+                                <ul>
+                                    <th:block th:each="champ : ${simulationSet.redPicks}">
+                                        <li>
+                                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" alt="픽 이미지">
+                                        </li>
+                                    </th:block>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </th:block>
+        </ul>
+
+        <a href="/test" class="create-button">벤픽 시뮬레이션 만들기</a>
+    </div>
+
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

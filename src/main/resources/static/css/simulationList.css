@@ -1,0 +1,87 @@
+.simulation-item {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.simulation-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.simulation-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #2f3640;
+    margin-bottom: 10px;
+}
+
+.simulation-title .simulation-date,
+.simulation-title .simulation-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 20px;
+    color: #2f3640;
+}
+
+/* 상세 영역을 기본적으로 숨기고, hover시 표시 */
+.simulation-item .simulation-detail {
+    display: none;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.simulation-item:hover .simulation-detail {
+    display: block;
+}
+
+/* 상세 영역에서 벤픽, 픽을 나열하는 스타일 */
+.simulation-item .simulation-detail .bans,
+.simulation-item .simulation-detail .picks {
+    display: flex;
+    justify-content: space-between;
+}
+
+.simulation-item .simulation-detail h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.simulation-item .simulation-detail ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.simulation-item .simulation-detail ul li {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.simulation-item .simulation-detail ul li img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+/* 각 팀 벤픽, 픽 영역을 2개씩 나누는 스타일 */
+.simulation-item .simulation-detail .blue-bans,
+.simulation-item .simulation-detail .red-bans,
+.simulation-item .simulation-detail .blue-picks,
+.simulation-item .simulation-detail .red-picks {
+    width: 45%;
+}
+
+/* 마우스를 올렸을 때 상세 정보가 아래로 보이도록 */
+.simulation-item:hover .simulation-title {
+    color: #00aaff; /* hover 시 타이틀 색상 변경 */
+}

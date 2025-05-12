@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>롤 챔피언 선택</title>
-  <link rel="stylesheet" href="/css/main.css">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('LOL Draft Start')"></head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/main.css">
+  <script src="/js/main.js"></script>
 <body>
+	<header th:replace="fragments/header :: header"></header>
 	<div id="timer-container" style="text-align:center; font-size: 24px; font-weight: bold; margin-bottom: 20px;">
 	  <span id="timer">30</span> 초 남음
 	</div>
@@ -36,9 +35,10 @@
       <div class="pick-row" id="red-picks"></div>
     </div>
   </div>
+  <div class="select-button">
+	  <button id="select-button">선택</button>
+  </div>
   
-  <button id="select-button" class="select-button">선택</button>
-
-  <script src="/js/main.js"></script>
+  <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
 </html>

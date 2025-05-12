@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('LOL Draft')"></head>
+<meta charset="UTF-8">
+<body>
+	<header th:replace="fragments/header :: header"></header>
+	 <main class="main-content container">
+	     <h2>환영합니다!</h2>
+	     <p>이곳은 리그 오브 레전드 챔피언 벤픽 웹앱입니다.</p>
+	     <div class="card">
+	         <h3>빠른 시작</h3>
+	         <p>지금 벤픽 시뮬레이션을 시작해보세요!</p>
+	         <a href="/simulations" class="primary-btn">시작하기</a>
+	     </div>
+	 </main>
+
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

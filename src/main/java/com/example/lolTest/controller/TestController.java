@@ -11,4 +11,14 @@ public class TestController
     {
         return "layout/index";
     }
+
+
+
+
+
+    @GetMapping("/main")
+    public String main()
+    {
+        return "layout/main";
+    }
 }

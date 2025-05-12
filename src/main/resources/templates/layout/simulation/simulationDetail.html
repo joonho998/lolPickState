@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('LOL 시뮬레이션 상세')"></head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/simulationDetail.css}" />
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class="detail-container">
+    <h1>벤픽 시뮬레이션 상세페이지</h1>
+
+    <th:block th:each="set : ${simulationSets}">
+        <div class="set-block">
+            <h2 th:text="'세트 ' + ${set.set}">세트 1</h2>
+
+            <div class="row-block">
+                <div class="team-box">
+                    <div class="label">블루 벤픽</div>
+                    <div class="champ-row">
+                        <th:block th:each="champ : ${set.blueBans}">
+                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
+                        </th:block>
+                    </div>
+                </div>
+                <div class="team-box">
+                    <div class="label">레드 벤픽</div>
+                    <div class="champ-row">
+                        <th:block th:each="champ : ${set.redBans}">
+                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-block">
+                <div class="team-box">
+                    <div class="label">블루 픽</div>
+                    <div class="champ-row">
+                        <th:block th:each="champ : ${set.bluePicks}">
+                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
+                        </th:block>
+                    </div>
+                </div>
+                <div class="team-box">
+                    <div class="label">레드 픽</div>
+                    <div class="champ-row">
+                        <th:block th:each="champ : ${set.redPicks}">
+                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

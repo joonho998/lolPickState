@@ -1,0 +1,118 @@
+/* 공통 스타일 */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f6fa;
+    color: #2f3640;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 헤더 스타일 */
+.navbar {
+    background-color: #2f3640;
+    padding: 1rem 0;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: inline-block;
+    color: #00aaff;
+}
+
+.navbar .nav-menu {
+    float: right;
+}
+
+.navbar .nav-menu a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navbar .nav-menu a:hover {
+    color: #00aaff;
+}
+
+/* 본문 영역 */
+.main-content {
+    padding: 3rem 0;
+}
+
+.card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    margin-top: 2rem;
+}
+
+.primary-btn {
+    background-color: #00aaff;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.primary-btn:hover {
+    background-color: #008ecc;
+}
+
+/* 푸터 스타일 */
+.footer {
+    background-color: #2f3640;
+    color: #dcdde1;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* 시뮬레이션 리스트 전용 스타일 */
+.simulation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.simulation-item {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
+.simulation-item:nth-child(even) {
+    background-color: #f0f2f5;
+}
+
+.simulation-item:last-child {
+    border-bottom: none;
+}
+
+.create-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #00aaff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.create-button:hover {
+    background-color: #008ecc;
+}

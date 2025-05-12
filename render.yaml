@@ -1,9 +1,5 @@
 services:
   - type: web
-    name: lolTest
-    env: java
-    buildCommand: ./mvnw clean package
-    startCommand: java -jar target/lolTest.war
-    envVars:
-      - key: JAVA_VERSION
-        value: 8
+    name: my-java-docker-app
+    env: docker
+    plan: free

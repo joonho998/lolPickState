@@ -1,0 +1,123 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f3f3f3;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+#role-filter {
+  margin-bottom: 20px;
+}
+
+#role-filter button {
+  background-color: #333;
+  color: #fff;
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#role-filter button:hover {
+  background-color: #4dc8ff;
+}
+
+.banpick-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* 밴 영역 (가로 정렬) */
+.ban-row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+/* 픽 영역 (세로 정렬) */
+.pick-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ban-row div, .pick-row div {
+  width: 40px;
+  height: 40px;
+  background-color: #111;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+/* 픽 이미지 크기 확대 */
+.pick-row img {
+  width: 60px;
+  height: 60px;
+  background-color: #111;
+  border: 2px solid #555;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* 기존 밴 이미지 크기 유지 */
+.ban-row img {
+  width: 40px;
+  height: 40px;
+  background-color: #111;
+  border: 1px solid #444;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+#blue-bans img, #red-bans img,
+#blue-picks img, #red-picks img {
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  background-color: #111;
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+#champion-list {
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(5, 50px);
+  gap: 10px;
+  overflow-y: auto;
+  max-height: 600px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+.champion-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.champion-icon:hover {
+  transform: scale(1.1);
+}
+
+.champion-icon.selected {
+  filter: grayscale(100%) brightness(0.5);
+  pointer-events: none; /* 클릭 비활성화 */
+  opacity: 0.6;
+}
+
+.highlight-slot {
+  border: 2px solid yellow;
+}

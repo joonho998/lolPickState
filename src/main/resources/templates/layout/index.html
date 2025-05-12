@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>롤 챔피언 선택</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+	<div id="timer-container" style="text-align:center; font-size: 24px; font-weight: bold; margin-bottom: 20px;">
+	  <span id="timer">30</span> 초 남음
+	</div>
+  <!-- 라인 필터 버튼 -->
+  <div id="role-filter">
+    <button data-role="ALL">전체</button>
+    <button data-role="TOP">탑</button>
+    <button data-role="JUNGLE">정글</button>
+    <button data-role="MID">미드</button>
+    <button data-role="ADC">원딜</button>
+    <button data-role="SUPPORT">서폿</button>
+  </div>
+
+  <div class="banpick-container">
+    <!-- 블루팀 -->
+    <div class="team blue-team">
+      <div class="ban-row" id="blue-bans"></div>
+      <div class="pick-row" id="blue-picks"></div>
+    </div>
+
+    <!-- 챔피언 목록 -->
+    <div id="champion-list"></div>
+
+    <!-- 레드팀 -->
+    <div class="team red-team">
+      <div class="ban-row" id="red-bans"></div>
+      <div class="pick-row" id="red-picks"></div>
+    </div>
+  </div>
+  
+  <button id="select-button" class="select-button">선택</button>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

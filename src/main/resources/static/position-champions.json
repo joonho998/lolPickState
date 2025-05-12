@@ -1,0 +1,36 @@
+{
+  "TOP": [
+    "Aatrox", "Camille", "Chogath", "Darius", "DrMundo", "Fiora",
+    "Garen", "Gnar", "Gragas", "Gwen", "Illaoi", "Jax", "Jayce", "Kayle",
+    "Kennen", "Malphite", "Mordekaiser", "Nasus", "Ornn", "Pantheon",
+    "Poppy", "Quinn", "Renekton", "Rumble", "Sett", "Shen", "Singed",
+    "Sion", "Teemo", "Trundle", "Tryndamere", "Urgot", "Volibear", "Yorick"
+  ],
+  "JUNGLE": [
+    "Amumu", "Belveth", "Briar", "Diana", "Ekko", "Elise", "Evelynn",
+    "Fiddlesticks", "Gragas", "Hecarim", "Ivern", "JarvanIV", "Jax",
+    "Karthus", "Kayn", "KhaZix", "Kindred", "LeeSin", "Lillia", "Maokai",
+    "MasterYi", "Nidalee", "Nocturne", "Nunu", "Poppy", "Rammus", "RekSai",
+    "Rengar", "Sejuani", "Shaco", "Shyvana", "Taliyah", "Trundle", "Udyr",
+    "Vi", "Viego", "Warwick", "Wukong", "Zac"
+  ],
+  "MID": [
+    "Ahri", "Akali", "Anivia", "Annie", "AurelionSol", "Azir", "Brand",
+    "Cassiopeia", "Corki", "Diana", "Ekko", "Fizz", "Galio", "Heimerdinger",
+    "Irelia", "Jayce", "Kassadin", "Katarina", "LeBlanc", "Lissandra",
+    "Lux", "Malzahar", "Neeko", "Orianna", "Qiyana", "Ryze", "Swain",
+    "Syndra", "Sylas", "Taliyah", "Talon", "TwistedFate", "Veigar",
+    "Velkoz", "Vex", "Viktor", "Vladimir", "Xerath", "Yasuo", "Yone", "Zed", "Zoe"
+  ],
+  "ADC": [
+    "Aphelios", "Ashe", "Caitlyn", "Draven", "Ezreal", "Jhin", "Jinx", "Kalista", "Kaisa",
+    "KogMaw", "Lucian", "MissFortune", "Nilah", "Samira", "Senna", "Sivir", "Tristana",
+    "Twitch", "Varus", "Vayne", "Xayah", "Zeri", "Seraphine"
+  ],
+  "SUPPORT": [
+    "Alistar", "Amumu", "Bard", "Blitzcrank", "Brand", "Braum", "Janna", "Karma", "Leona",
+    "Lulu", "Lux", "Maokai", "Milio", "Morgana", "Nami", "Nautilus", "Pyke", "Rakan", "Rell",
+    "Renata", "Seraphine", "Sett", "Sona", "Soraka", "Swain", "TahmKench", "Taric", "Thresh",
+    "Velkoz", "Xerath", "Yuumi", "Zilean", "Zyra"
+  ]
+}

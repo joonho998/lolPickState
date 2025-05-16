@@ -37,7 +37,7 @@ $(document).ready(function () {
     	}
     });
     
-    let socket = new WebSocket("ws://localhost:8080/ws/draft?roomId=" + encodeURIComponent(roomId));
+    let socket = new WebSocket("wss://lolpickstate-1.onrender.com/ws/draft?roomId=" + encodeURIComponent(roomId));
 
 	socket.onmessage = (event) => {
 		console.log("📨 Message from server:", event.data);
@@ -99,6 +99,15 @@ $(document).ready(function () {
       pickState.phase = "BAN"; // 벤 단계
     } else if (pickState.index >= 16) {
       pickState.phase = "PICK"; // 픽 단계
+    }
+    
+    const currentSlot = getCurrentSlot() || "끝";
+    $("#current-slot").text(`${pickState.phase} 중: ${currentSlot}`);
+
+    if (pickState.index >= pickState.order.length) {
+      clearInterval(timerInterval);
+      $("#timer").text("완료");
+      $("#start-button").show();  // 재시작 가능하게
     }
   }
 
@@ -323,4 +332,22 @@ $(document).ready(function () {
 	    decreaseTimer();
 	  }, 1000);
   }
+  
+  const modal = document.getElementById("info-modal");
+  const closeBtn = document.querySelector(".close-button");
+
+  // 모달 열기
+  modal.style.display = "block";
+
+  // 닫기 버튼 클릭 시 모달 닫기
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  };
+
+  // 모달 바깥 클릭 시 모달 닫기
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
 });

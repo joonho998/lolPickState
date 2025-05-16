@@ -4,7 +4,7 @@ $(document).ready(function () {
     const lang = "ko_KR";
     const champDataUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/data/${lang}/champion.json`;
     const champImageUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/`;
-    const champFullImageUrl = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/`
+    const champFullImageUrl = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/`
     
     let timerInterval = null; // 타이머 인터벌 저장
     let timerStarted = false; // 타이머가 시작되었는지 여부

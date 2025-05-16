@@ -11,13 +11,13 @@
 
     <th:block th:each="set : ${simulationSets}">
         <div class="set-block">
-            <h2 th:text="'세트 ' + ${set.set}">세트 1</h2>
+            <h2 th:text="'세트 ' + ${set.setNum}">세트 1</h2>
 
             <div class="row-block">
                 <div class="team-box">
                     <div class="label">블루 벤픽</div>
                     <div class="champ-row">
-                        <th:block th:each="champ : ${set.blueBans}">
+                        <th:block th:each="champ : ${set.blueBanList}">
                             <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
                         </th:block>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="team-box">
                     <div class="label">레드 벤픽</div>
                     <div class="champ-row">
-                        <th:block th:each="champ : ${set.redBans}">
+                        <th:block th:each="champ : ${set.redBanList}">
                             <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
                         </th:block>
                     </div>
@@ -36,7 +36,7 @@
                 <div class="team-box">
                     <div class="label">블루 픽</div>
                     <div class="champ-row">
-                        <th:block th:each="champ : ${set.bluePicks}">
+                        <th:block th:each="champ : ${set.bluePickList}">
                             <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
                         </th:block>
                     </div>
@@ -44,7 +44,7 @@
                 <div class="team-box">
                     <div class="label">레드 픽</div>
                     <div class="champ-row">
-                        <th:block th:each="champ : ${set.redPicks}">
+                        <th:block th:each="champ : ${set.redPickList}">
                             <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
                         </th:block>
                     </div>

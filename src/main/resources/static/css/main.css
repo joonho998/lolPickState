@@ -1,124 +1,192 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f3f3f3;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   margin: 0;
+  color: #fff;
 }
-.select-button{
+
+.select-button,
+.save-button,
+#role-filter {
   text-align: center;
-}
-#role-filter{
-  margin-bottom: 20px;
-  text-align: center;
+  margin-top: 20px;
 }
 
 #role-filter button {
-  background-color: #333;
+  background-color: #2d2f36;
   color: #fff;
-  padding: 8px 16px;
-  margin: 0 5px;
-  border: none;
-  border-radius: 4px;
+  padding: 10px 20px;
+  margin: 0 6px;
+  border: 1px solid #555;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 #role-filter button:hover {
   background-color: #4dc8ff;
+  transform: scale(1.05);
 }
 
 .banpick-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 30px;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 20px;
 }
 
 .team {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  width: 500px;
+  height: auto;
 }
-/* 밴 영역 (가로 정렬) */
+
+.blue-team {
+  border: 3px solid #1e90ff;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: rgba(30, 144, 255, 0.1);
+}
+
+.red-team {
+  border: 3px solid #ff4d4d;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: rgba(255, 77, 77, 0.1);
+}
+
 .ban-row {
   display: flex;
   justify-content: center;
-  gap: 5px;
-  margin-bottom: 10px;
-}
-/* 픽 영역 (세로 정렬) */
-.pick-row {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-.ban-row div, .pick-row div {
-  width: 40px;
-  height: 40px;
-  background-color: #111;
-  border: 1px solid #444;
-  border-radius: 4px;
-}
-
-/* 픽 이미지 크기 확대 */
-.pick-row img {
-  width: 60px;
-  height: 60px;
-  background-color: #111;
-  border: 2px solid #555;
+.ban-row img {
+  width: 48px;
+  height: 48px;
+  background-color: #222;
+  border: 2px solid #999;
   border-radius: 6px;
   object-fit: cover;
 }
 
-/* 기존 밴 이미지 크기 유지 */
-.ban-row img {
-  width: 40px;
-  height: 40px;
-  background-color: #111;
-  border: 1px solid #444;
-  border-radius: 4px;
-  object-fit: cover;
+.pick-row {
+  display: flex;
+  justify-content: center;
+  position: relative; /* 추가: 챔피언 이름 위치 기준이 됨 */
+  margin-bottom: 15px;
 }
 
-#blue-bans img, #red-bans img,
-#blue-picks img, #red-picks img {
-  width: 40px;
-  height: 40px;
-  margin: 4px;
+.pick-row img {
+  width: 400px;
+  height: 180px;
   background-color: #111;
-  border: 1px solid #555;
-  border-radius: 4px;
+  border: 3px solid #666;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
+
+.pick-row .champion-name {
+  position: absolute;
+  bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 5px black;
+  pointer-events: none;
+}
+
 #champion-list {
   display: grid;
-  grid-template-columns: repeat(10, 50px);
-  grid-template-rows: repeat(5, 50px);
+  grid-template-columns: repeat(8, 60px);
   gap: 10px;
-  overflow-y: auto;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid #888;
+  border-radius: 10px;
   max-height: 600px;
-  padding: 10px;
-  background-color: white;
-  border: 1px solid #ccc;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .champion-icon {
-  width: 100%;
-  height: 100%;
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
   object-fit: cover;
-  border-radius: 4px;
+  border: 2px solid transparent;
   cursor: pointer;
+  transition: transform 0.2s, border 0.2s;
 }
 
 .champion-icon:hover {
   transform: scale(1.1);
+  border: 2px solid #fff;
 }
 
 .champion-icon.selected {
   filter: grayscale(100%) brightness(0.5);
-  pointer-events: none; /* 클릭 비활성화 */
+  pointer-events: none;
   opacity: 0.6;
+  border: 2px solid #ffd700;
 }
 
 .highlight-slot {
-  border: 2px solid yellow;
+  border: 3px solid yellow;
+}
+
+#save-draft-btn {
+  padding: 12px 24px;
+  background-color: #28a745;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#save-draft-btn:hover {
+  background-color: #218838;
+}
+
+#start-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#timer {
+  font-size: 50px;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+#select-button {
+  padding: 10px 20px;
+  background-color: #2196F3;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#select-button:hover {
+  background-color: #1976D2;
 }

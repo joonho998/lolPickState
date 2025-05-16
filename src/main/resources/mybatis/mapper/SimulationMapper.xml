@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.lolTest.mapper.simulation.SimulationMapper">
+
+    <!-- resultMap 사용  -->
+    <resultMap id="SimulationSetResultMap" type="com.example.lolTest.domain.SimulationSet">
+        <result property="simulationId" column="simulation_id"/>
+        <result property="date" column="date"/>
+        <result property="totalSets" column="total_sets"/>
+        <result property="setNum" column="setNum"/>
+        <result property="blueBans" column="blue_bans"/>
+        <result property="redBans" column="red_bans"/>
+        <result property="bluePicks" column="blue_picks"/>
+        <result property="redPicks" column="red_picks"/>
+    </resultMap>
+    
+	
+	<insert id="insertDraft" parameterType="com.example.lolTest.domain.SimulationSet">
+	    INSERT INTO draft_simulation (
+	        simulation_id,
+	        total_sets,
+	        setNum,
+	        blue_bans,
+	        red_bans,
+	        blue_picks,
+	        red_picks,
+	        date
+	    ) VALUES (
+	        CASE
+		        WHEN #{simulationId} IS NULL OR #{simulationId} = '' THEN
+		            (SELECT (COALESCE(MAX(simulation_id::int), 0) + 1)::text FROM draft_simulation WHERE simulation_id ~ '^\d+$')
+		        ELSE
+		            #{simulationId}
+		    END,
+	        COALESCE(#{totalSets}, 0)+1,
+	        COALESCE(
+        		(SELECT MAX(setNum) FROM draft_simulation WHERE simulation_id = #{simulationId}),
+        		0
+    		) + 1,
+	        #{blueBans},
+	        #{redBans},
+	        #{bluePicks},
+	        #{redPicks},
+	        TO_CHAR(CURRENT_TIMESTAMP, 'YYYY-MM-DD HH24:MI')
+	    )
+	</insert>
+	
+	<update id="updateDraft" parameterType="String">
+	    UPDATE draft_simulation
+        SET total_sets = total_sets+1
+        WHERE simulation_id=#{simulationId}
+	</update>
+	
+	<select id="draftList" resultMap="SimulationSetResultMap" parameterType="String">
+		SELECT 
+			*
+		FROM 
+			DRAFT_SIMULATION st 
+		WHERE (st.simulation_id, st.setNum) IN (
+		    SELECT 
+		    	simulation_id, MAX(setNum)
+		    FROM 
+		    	DRAFT_SIMULATION
+		    GROUP BY 
+		    	simulation_id
+		)
+		ORDER BY simulation_id DESC
+	</select>
+	<select id="draftDetail" resultMap="SimulationSetResultMap" parameterType="String">
+		SELECT 
+			*
+		FROM 
+			DRAFT_SIMULATION
+		WHERE 
+			simulation_id = #{simulationId}
+		ORDER BY setnum
+	</select>
+	<select id="pickList" resultMap="SimulationSetResultMap" parameterType="String">
+		SELECT 
+			blue_picks,
+			red_picks
+		FROM 
+			draft_simulation
+		WHERE 
+			simulation_id = #{simulationId}
+	</select>
+</mapper>

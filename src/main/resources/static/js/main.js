@@ -1,10 +1,14 @@
 $(document).ready(function () {
-	
-    const version = "15.9.1"; // 최신 버전으로 업데이트
+	const roomId = $("#roomId").val();
+    const version = "15.10.1"; // 최신 버전으로 업데이트
     const lang = "ko_KR";
     const champDataUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/data/${lang}/champion.json`;
     const champImageUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/`;
-
+    const champFullImageUrl = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/`
+    
+    let timerInterval = null; // 타이머 인터벌 저장
+    let timerStarted = false; // 타이머가 시작되었는지 여부
+    
     let allChampions = {};
     let positionMap = {};
     let currentRole = "ALL"; // 선택된 라인 필터 (기본값: 전체)
@@ -20,8 +24,20 @@ $(document).ready(function () {
 	    selected: [],
 	    timeLeft: 30,  // 30초 타이머
     };
-  
-    let socket = new WebSocket("ws://localhost:8080/ws/draft");
+    $.ajax({
+    	url: "/simulations/pickList",
+    	type: "POST",
+    	data: {simulationId : $("#simulationId").val()},
+    	success: function (res) {
+    		pickState.selected.push(...res.split(",").map(s => s.trim()));
+    		renderChampionList(Object.keys(allChampions));
+    	},
+    	error: function () {
+    		alert("서버 에러");
+    	}
+    });
+    
+    let socket = new WebSocket("ws://localhost:8080/ws/draft?roomId=" + encodeURIComponent(roomId));
 
 	socket.onmessage = (event) => {
 		console.log("📨 Message from server:", event.data);
@@ -39,6 +55,13 @@ $(document).ready(function () {
 			
 			renderChampionList(Object.keys(allChampions)); // 갱신
 		}
+		
+		if(msg.type === "start") {
+		    console.log("🚀 시작 버튼 클릭 - 타이머 시작");
+		    $("#start-button").hide(); // 시작 버튼 숨김
+		    startTimer();              // 타이머 시작
+		    timerStarted = true;
+		  }
 	};
 
 	socket.onopen = () => {
@@ -53,6 +76,12 @@ $(document).ready(function () {
 	socket.onclose = () => {
 	    console.log("🔌 WebSocket closed");
 	};
+	
+	$("#start-button").on("click", function () {
+		  // 시작 메시지 WebSocket으로 전송
+		  socket.send(JSON.stringify({ type: "start" }));
+		  // 버튼은 서버 응답에서 숨겨지므로 여기선 안 숨김
+	});
   //현재 슬롯 가져오기
   function getCurrentSlot() {
     return pickState.order[pickState.index];
@@ -123,11 +152,16 @@ $(document).ready(function () {
   $("#select-button").on("click", function () {
     if (!selectedChampionId) return; // 선택된 챔피언이 없으면 무시
 
-    const slot = getCurrentSlot();
+    const slot = getCurrentSlot(); //blue-pick-1
+    const name = slot.replace("pick", "name");
     if (!slot) return;
-
-    const imgUrl = champImageUrl + allChampions[selectedChampionId].image.full;
-
+    var imgUrl = "";
+    if(slot.includes("pick")){
+    	imgUrl = champFullImageUrl + selectedChampionId +"_0.jpg"
+		$(`#${name}`).text(selectedChampionId);
+    }else{
+    	imgUrl = champImageUrl + allChampions[selectedChampionId].image.full;
+    }
     // 이미지 설정
     $(`#${slot}`).attr("src", imgUrl).attr("alt", selectedChampionId).attr("title", selectedChampionId);
     pickState.selected.push(selectedChampionId);
@@ -191,10 +225,10 @@ $(document).ready(function () {
 	  const allChampionIds = Object.keys(allChampions);  // 모든 챔피언 아이디 리스트
 	  const randomIndex = Math.floor(Math.random() * allChampionIds.length);  // 랜덤 인덱스
 	  const randomChampionId = allChampionIds[randomIndex];  // 랜덤 챔피언 ID
-
+	  const name = slot.replace("pick", "name");
 	  // 랜덤 챔피언의 이미지 URL 가져오기
-	  const imgUrl = champImageUrl + allChampions[randomChampionId].image.full;
-
+	  var imgUrl = champFullImageUrl + randomChampionId +"_0.jpg"
+	  $(`#${name}`).text(selectedChampionId);
 	  // 해당 슬롯에 랜덤 챔피언 이미지 설정
 	  $(`#${slot}`).attr("src", imgUrl).attr("alt", randomChampionId).attr("title", allChampions[randomChampionId].name);
 
@@ -207,11 +241,6 @@ $(document).ready(function () {
     $("#champion-list").empty();
     const filteredChampions = currentRole === "ALL" ? championIds : championIds.filter(id => positionMap[currentRole].includes(id));
     // 챔피언 이름순으로 정렬
-    filteredChampions.sort((a, b) => {
-      const nameA = allChampions[a].name.toUpperCase(); // 대소문자 구분 없이 비교
-      const nameB = allChampions[b].name.toUpperCase(); // 대소문자 구분 없이 비교
-      return nameA < nameB ? -1 : nameA > nameB ? 1 : 0; // 오름차순 정렬
-    });
     filteredChampions.forEach(id => {
       if (allChampions[id]) {
         const champ = allChampions[id];
@@ -230,17 +259,68 @@ $(document).ready(function () {
       }
     });
   }
-  
-  // 타이머를 매초 업데이트
-  setInterval(function() {
-    decreaseTimer();
-  }, 1000); // 1초마다 실행
 
   // 픽/벤 창 초기화
-  for (let i = 1; i <= 5; i++) {
-    $("#blue-bans").append(`<img id="blue-ban-${i}" />`);
-    $("#red-bans").append(`<img id="red-ban-${i}" />`);
-    $("#blue-picks").append(`<img id="blue-pick-${i}" />`);
-    $("#red-picks").append(`<img id="red-pick-${i}" />`);
+//  for (let i = 1; i <= 5; i++) {
+//    $("#blue-bans").append(`<img id="blue-ban-${i}" />`);
+//    $("#red-bans").append(`<img id="red-ban-${i}" />`);
+//    $("#blue-picks").append(`<img id="blue-pick-${i}" />`);
+//    $("#blue-picks").append(`<div class="champion-name" id="blue-name-${i}" /></div>`);
+//    $("#red-picks").append(`<img id="red-pick-${i}" />`);
+//    $("#red-picks").append(`<div class="champion-name" id="red-name-${i}" /></div>`);
+//  }
+  
+  $("#save-draft-btn").on("click", function () {
+	  const draftData = {
+	          roomId: roomId,
+	          blueBans: [],
+	          redBans: [],
+	          bluePicks: [],
+	          redPicks: []
+	      };
+	  
+	      // 벤픽 데이터를 배열로 수집
+	  for (let i = 1; i <= 5; i++) {
+		  
+	      draftData.blueBans.push($("#blue-ban-" + i).attr("alt") || "");
+	      draftData.redBans.push($("#red-ban-" + i).attr("alt") || "");
+	      draftData.bluePicks.push($("#blue-pick-" + i).attr("alt") || "");
+	      draftData.redPicks.push($("#red-pick-" + i).attr("alt") || "");
+	  }
+	  console.log($("#simulationId").val());
+	  console.log($("#totalSets").val());
+	  // 문자열로 변환 (예: "Azir, Bard, Braum, , ")
+      const payload = {
+          roomId: draftData.roomId,
+          simulationId: $("#simulationId").val(),
+          totalSets: $("#totalSets").val(),
+          blueBans: draftData.blueBans.join(", "),
+          redBans: draftData.redBans.join(", "),
+          bluePicks: draftData.bluePicks.join(", "),
+          redPicks: draftData.redPicks.join(", ")
+      };
+
+      // 서버에 전송
+      $.ajax({
+          url: "/simulations/save",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+          success: function (res) {
+              alert("저장 완료!");
+              window.location.href = '/simulations';
+          },
+          error: function () {
+              alert("저장 실패!");
+          }
+      });
+	});
+  function startTimer() {
+	  if (timerInterval) clearInterval(timerInterval); // 기존 인터벌 제거
+	  pickState.timeLeft = 30; // 30초 초기화
+	  updateTimerDisplay();
+	  timerInterval = setInterval(() => {
+	    decreaseTimer();
+	  }, 1000);
   }
 });

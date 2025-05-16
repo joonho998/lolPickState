@@ -1,10 +1,10 @@
 package com.example.lolTest.handler;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -16,8 +16,10 @@ public class DraftHandler extends TextWebSocketHandler
 {
 
     // 클라이언트 세션을 저장할 Map
-    private final Map<String, WebSocketSession> sessions          = new ConcurrentHashMap<>();
-    private final Set<String>                   selectedChampions = new HashSet<>();
+    //private final Map<String, WebSocketSession> sessions          = new ConcurrentHashMap<>();
+    //private final Set<String>                   selectedChampions = new HashSet<>();
+    // 방 ID → 방에 속한 세션들
+    private final Map<String, Set<WebSocketSession>> roomSessions = new ConcurrentHashMap<>();
 
 
 
@@ -26,9 +28,9 @@ public class DraftHandler extends TextWebSocketHandler
     @Override
     public void afterConnectionEstablished(final WebSocketSession session) throws Exception
     {
-        String sessionId = session.getId(); // 세션 아이디 (각 클라이언트마다 유니크)
-        this.sessions.put(sessionId, session); // 세션을 저장
-        System.out.println("Client connected: " + session.getId());
+        String roomId = getRoomId(session);
+        this.roomSessions.computeIfAbsent(roomId, k -> ConcurrentHashMap.newKeySet()).add(session);
+        System.out.println("Client connected: " + session.getId() + " (room: " + roomId + ")");
     }
 
 
@@ -39,15 +41,38 @@ public class DraftHandler extends TextWebSocketHandler
     public void handleTextMessage(final WebSocketSession session, final TextMessage message) throws Exception
     {
         String messageContent = message.getPayload();
-        System.out.println("Message content: " + message.getPayload());
-        // 받은 메시지를 모든 다른 클라이언트에게 전송
-        for ( Map.Entry<String, WebSocketSession> entry : this.sessions.entrySet() )
+        String roomId = getRoomId(session);
+
+        System.out.println("Message in room [" + roomId + "]: " + messageContent);
+
+        JSONObject msg = new JSONObject(messageContent);
+        // "start" 타입 메시지인 경우: 같은 방의 모든 세션에게 전송
+        if ( "start".equals(msg.getString("type")) )
         {
-            WebSocketSession otherSession = entry.getValue();
-            if ( !otherSession.getId().equals(session.getId()) )
+            Set<WebSocketSession> sessionsInRoom = this.roomSessions.get(roomId);
+            if ( sessionsInRoom != null )
             {
-                // 나와 다른 세션에게 메시지 전달
-                otherSession.sendMessage(new TextMessage(messageContent));
+                for ( WebSocketSession s : sessionsInRoom )
+                {
+                    if ( s.isOpen() )
+                    {
+                        s.sendMessage(new TextMessage(msg.toString()));
+                    }
+                }
+            }
+            return; // 여기서 더 이상 아래 코드 실행할 필요 없음
+        }
+
+        // 같은 방의 다른 세션에게만 메시지 전달
+        Set<WebSocketSession> sessionsInRoom = this.roomSessions.get(roomId);
+        if ( sessionsInRoom != null )
+        {
+            for ( WebSocketSession s : sessionsInRoom )
+            {
+                if ( s.isOpen() && !s.getId().equals(session.getId()) )
+                {
+                    s.sendMessage(new TextMessage(messageContent));
+                }
             }
         }
     }
@@ -59,8 +84,61 @@ public class DraftHandler extends TextWebSocketHandler
     @Override
     public void afterConnectionClosed(final WebSocketSession session, final CloseStatus status)
     {
-        this.sessions.remove(session.getId());
-        System.out.println("Client disconnected: " + session.getId());
+        String roomId = getRoomId(session);
+        Set<WebSocketSession> sessionsInRoom = this.roomSessions.get(roomId);
+
+        if ( sessionsInRoom != null )
+        {
+            sessionsInRoom.remove(session);
+            if ( sessionsInRoom.isEmpty() )
+            {
+                this.roomSessions.remove(roomId); // 방 비었으면 정리
+            }
+        }
+
+        System.out.println("Client disconnected: " + session.getId() + " (room: " + roomId + ")");
+    }
+
+
+
+
+
+    private String getRoomId(final WebSocketSession session)
+    {
+        // 쿼리 파라미터에서 roomId 추출
+        String uri = session.getUri().toString(); // ex: /ws/draft?roomId=abc
+        String[] parts = uri.split("\\?");
+        if ( parts.length > 1 )
+        {
+            String[] queryParams = parts[1].split("&");
+            for ( String param : queryParams )
+            {
+                String[] keyVal = param.split("=");
+                if ( keyVal.length == 2 && keyVal[0].equals("roomId") )
+                {
+                    return keyVal[1];
+                }
+            }
+        }
+        return "default"; // 못 찾으면 default 방
+    }
+
+
+
+
+
+    public boolean roomExists(final String roomId)
+    {
+        return this.roomSessions.containsKey(roomId);
+    }
+
+
+
+
+
+    public void createRoom(final String roomId)
+    {
+        this.roomSessions.putIfAbsent(roomId, ConcurrentHashMap.newKeySet());
     }
 
 }

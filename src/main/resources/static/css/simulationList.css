@@ -85,3 +85,140 @@
 .simulation-item:hover .simulation-title {
     color: #00aaff; /* hover 시 타이틀 색상 변경 */
 }
+
+.room-entry-box {
+    margin-top: 30px;
+    padding: 15px 20px;
+    border: 1px solid #00aaff;
+    border-radius: 8px;
+    background-color: #f9fcff;
+    text-align: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.room-entry-box h2 {
+    margin-bottom: 10px;
+    color: #2f3640;
+    font-size: 1.1rem;
+}
+
+/* Form 스타일 */
+#hiddenPostForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+/* 입력 필드 스타일 */
+#roomIdInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* 버튼 스타일 */
+.enter-room-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* 파란색 버튼 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* 버튼 호버 스타일 */
+.enter-room-btn:hover {
+    background-color: #0056b3; /* 파란색 hover */
+}
+
+/* 버튼 클릭 스타일 */
+.enter-room-btn:active {
+    background-color: #004085; /* 파란색 클릭 */
+}
+
+
+.continue-btn {
+    margin-left: 10px;
+    padding: 4px 10px;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.continue-btn:hover {
+    background-color: #303f9f;
+}
+
+/* 모달 배경 (어두운 투명 배경) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* 모달 창 자체 */
+.modal-box {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-box input {
+    width: 80%;
+    padding: 8px;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.modal-buttons {
+    margin-top: 15px;
+}
+
+.modal-buttons button {
+    padding: 6px 12px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+#continueRoomEnterBtn {
+    background-color: #4caf50;
+    color: white;
+}
+
+#continueRoomCancelBtn {
+    background-color: #f44336;
+    color: white;
+}

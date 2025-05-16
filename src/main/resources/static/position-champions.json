@@ -1,10 +1,11 @@
 {
   "TOP": [
-    "Aatrox", "Camille", "Chogath", "Darius", "DrMundo", "Fiora",
-    "Garen", "Gnar", "Gragas", "Gwen", "Illaoi", "Jax", "Jayce", "Kayle",
-    "Kennen", "Malphite", "Mordekaiser", "Nasus", "Ornn", "Pantheon",
-    "Poppy", "Quinn", "Renekton", "Rumble", "Sett", "Shen", "Singed",
-    "Sion", "Teemo", "Trundle", "Tryndamere", "Urgot", "Volibear", "Yorick"
+	"Garen", "Gragas", "Gwen", "Nasus", "Darius", "DrMundo", "Rumble", "Renekton",
+	"Riven", "Malphite", "Mordekaiser", "DrMundo", "Vi", "Volibear", "Briar",
+	"Viktor", "Sion", "Shaco", "Sett", "Shen", "Singed", "Aatrox", "Ornn",
+	"Yorick", "Urgot", "Irelia", "Illaoi", "Zac", "Jax", "Jayce", "Camille",
+	"Kennen", "Kayle", "Quinn", "Trundle", "Tryndamere", "Teemo", "Pyke", "Pantheon",
+	"Poppy"
   ],
   "JUNGLE": [
     "Amumu", "Belveth", "Briar", "Diana", "Ekko", "Elise", "Evelynn",

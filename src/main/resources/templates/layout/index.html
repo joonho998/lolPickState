@@ -6,8 +6,12 @@
   <script src="/js/main.js"></script>
 <body>
 	<header th:replace="fragments/header :: header"></header>
+	<input type="hidden" id="roomId" name="roomId" th:value="${roomId}">
+	<input type="hidden" id="simulationId" name="simulationId" th:value="${simulationId}">
+	<input type="hidden" id="totalSets" name="totalSets" th:value="${totalSets}">
 	<div id="timer-container" style="text-align:center; font-size: 24px; font-weight: bold; margin-bottom: 20px;">
-	  <span id="timer">30</span> 초 남음
+	  <button id="start-button">시작</button>
+	  <span id="timer"></span>
 	</div>
   <!-- 라인 필터 버튼 -->
   <div id="role-filter">
@@ -22,21 +26,77 @@
   <div class="banpick-container">
     <!-- 블루팀 -->
     <div class="team blue-team">
-      <div class="ban-row" id="blue-bans"></div>
-      <div class="pick-row" id="blue-picks"></div>
+      <div class="ban-row" id="blue-bans">
+      	<img id="blue-ban-1" />
+      	<img id="blue-ban-2" />
+      	<img id="blue-ban-3" />
+      	<img id="blue-ban-4" />
+      	<img id="blue-ban-5" />
+      </div>
+      <div class="pick-row">
+	    <img id="blue-pick-1">
+	    <div class="champion-name" id="blue-name-1"></div>
+	  </div>
+      <div class="pick-row">
+	    <img id="blue-pick-2">
+	    <div class="champion-name" id="blue-name-2"></div>
+	  </div>	  
+      <div class="pick-row">
+	    <img id="blue-pick-3">
+	    <div class="champion-name" id="blue-name-3"></div>
+	  </div>
+      <div class="pick-row">
+	    <img id="blue-pick-4">
+	    <div class="champion-name" id="blue-name-4"></div>
+	  </div>	
+      <div class="pick-row">
+	    <img id="blue-pick-5">
+	    <div class="champion-name" id="blue-name-5"></div>
+	  </div>	    	  
     </div>
 
     <!-- 챔피언 목록 -->
-    <div id="champion-list"></div>
+    <div>
+	    <div id="champion-list"></div>
+		<div class="select-button">
+			<button id="select-button">선택</button>
+		</div>    
+    </div>
 
     <!-- 레드팀 -->
     <div class="team red-team">
-      <div class="ban-row" id="red-bans"></div>
-      <div class="pick-row" id="red-picks"></div>
+      <div class="ban-row" id="red-bans">
+      	<img id="red-ban-1" />
+      	<img id="red-ban-2" />
+      	<img id="red-ban-3" />
+      	<img id="red-ban-4" />
+      	<img id="red-ban-5" />
+      </div>
+      <div class="pick-row">
+	    <img id="red-pick-1">
+	    <div class="champion-name" id="red-name-1"></div>
+	  </div>
+      <div class="pick-row">
+	    <img id="red-pick-2">
+	    <div class="champion-name" id="red-name-2"></div>
+	  </div>	  
+      <div class="pick-row">
+	    <img id="red-pick-3">
+	    <div class="champion-name" id="red-name-3"></div>
+	  </div>
+      <div class="pick-row">
+	    <img id="red-pick-4">
+	    <div class="champion-name" id="red-name-4"></div>
+	  </div>	
+      <div class="pick-row">
+	    <img id="red-pick-5">
+	    <div class="champion-name" id="red-name-5"></div>
+	  </div>
     </div>
   </div>
-  <div class="select-button">
-	  <button id="select-button">선택</button>
+  
+  <div class="save-button">
+  	<button id="save-draft-btn">저장</button>
   </div>
   
   <th:block th:replace="fragments/footer :: footer"></th:block>

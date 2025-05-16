@@ -46,7 +46,6 @@ $(document).ready(function () {
 		if (msg.type === "select") {
 			const slot = msg.slot;
 			const champId = msg.championId;
-			const imgUrl = champImageUrl + allChampions[champId].image.full;
 			var imgUrl = "";
 		    if(slot.includes("pick")){
 		    	imgUrl = champFullImageUrl + selectedChampionId +"_0.jpg"

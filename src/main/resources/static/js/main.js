@@ -46,10 +46,11 @@ $(document).ready(function () {
 		if (msg.type === "select") {
 			const slot = msg.slot;
 			const champId = msg.championId;
+			const name = slot.replace("pick", "name");
 			var imgUrl = "";
 		    if(slot.includes("pick")){
 		    	imgUrl = champFullImageUrl + champId +"_0.jpg"
-				$(`#${name}`).text(selectedChampionId);
+				$(`#${name}`).text(champId);
 		    }else{
 		    	imgUrl = champImageUrl + allChampions[champId].image.full;
 		    }

@@ -47,7 +47,13 @@ $(document).ready(function () {
 			const slot = msg.slot;
 			const champId = msg.championId;
 			const imgUrl = champImageUrl + allChampions[champId].image.full;
-			
+			var imgUrl = "";
+		    if(slot.includes("pick")){
+		    	imgUrl = champFullImageUrl + selectedChampionId +"_0.jpg"
+				$(`#${name}`).text(selectedChampionId);
+		    }else{
+		    	imgUrl = champImageUrl + allChampions[selectedChampionId].image.full;
+		    }
 			$(`#${slot}`).attr("src", imgUrl).attr("alt", champId).attr("title", champId);
 			pickState.selected.push(champId); // 중복 방지
 			advancePick();

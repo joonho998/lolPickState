@@ -1,245 +1,353 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  margin: 0;
-  color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    margin: 0;
+    color: #fff;
 }
 
 .select-button,
 .save-button,
 #role-filter {
-  text-align: center;
-  margin-top: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 #role-filter button {
-  background-color: #2d2f36;
-  color: #fff;
-  padding: 10px 20px;
-  margin: 0 6px;
-  border: 1px solid #555;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
+    background-color: #2d2f36;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 6px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 #role-filter button:hover {
-  background-color: #4dc8ff;
-  transform: scale(1.05);
+    background-color: #4dc8ff;
+    transform: scale(1.05);
 }
 
 .banpick-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 20px;
 }
 
 .team {
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  height: auto;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: auto;
 }
 
 .blue-team {
-  border: 3px solid #1e90ff;
-  border-radius: 10px;
-  padding: 10px;
-  background-color: rgba(30, 144, 255, 0.1);
+    border: 3px solid #1e90ff;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(30, 144, 255, 0.1);
 }
 
 .red-team {
-  border: 3px solid #ff4d4d;
-  border-radius: 10px;
-  padding: 10px;
-  background-color: rgba(255, 77, 77, 0.1);
+    border: 3px solid #ff4d4d;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(255, 77, 77, 0.1);
 }
 
 .ban-row {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .ban-row img {
-  width: 48px;
-  height: 48px;
-  background-color: #222;
-  border: 2px solid #999;
-  border-radius: 6px;
-  object-fit: cover;
+    width: 48px;
+    height: 48px;
+    background-color: #222;
+    border: 2px solid #999;
+    border-radius: 6px;
+    object-fit: cover;
 }
 
 .pick-row {
-  display: flex;
-  justify-content: center;
-  position: relative; /* 추가: 챔피언 이름 위치 기준이 됨 */
-  margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    position: relative; /* 추가: 챔피언 이름 위치 기준이 됨 */
+    margin-bottom: 15px;
 }
 
 .pick-row img {
-  width: 400px;
-  height: 180px;
-  background-color: #111;
-  border: 3px solid #666;
-  border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    width: 400px;
+    height: 180px;
+    background-color: #111;
+    border: 3px solid #666;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .pick-row .champion-name {
-  position: absolute;
-  bottom: 10px;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0 0 5px black;
-  pointer-events: none;
+    position: absolute;
+    bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 5px black;
+    pointer-events: none;
 }
 
 #champion-list {
-  display: grid;
-  grid-template-columns: repeat(8, 60px);
-  gap: 10px;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid #888;
-  border-radius: 10px;
-  max-height: 600px;
-  overflow-y: auto;
-  scrollbar-width: thin;
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    gap: 10px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #888;
+    border-radius: 10px;
+    max-height: 600px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    user-select: none;
+    pointer-events: none;
 }
 
 .champion-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 6px;
-  object-fit: cover;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: transform 0.2s, border 0.2s;
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border 0.2s;
 }
 
 .champion-icon:hover {
-  transform: scale(1.1);
-  border: 2px solid #fff;
+    transform: scale(1.1);
+    border: 2px solid #fff;
 }
 
 .champion-icon.selected {
-  filter: grayscale(100%) brightness(0.5);
-  pointer-events: none;
-  opacity: 0.6;
-  border: 2px solid #ffd700;
+    filter: grayscale(100%) brightness(0.5);
+    pointer-events: none;
+    opacity: 0.6;
+    border: 2px solid #ffd700;
 }
 
 .highlight-slot {
-  border: 3px solid yellow;
+    border: 3px solid yellow;
 }
 
 #save-draft-btn {
-  padding: 12px 24px;
-  background-color: #28a745;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    padding: 12px 24px;
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 #save-draft-btn:hover {
-  background-color: #218838;
+    background-color: #218838;
 }
 
 #start-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
 }
 
 #timer {
-  font-size: 50px;
-  font-weight: bold;
-  color: #ffd700;
+    font-size: 50px;
+    font-weight: bold;
+    color: #ffd700;
 }
 
 #select-button {
-  padding: 10px 20px;
-  background-color: #2196F3;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 #select-button:hover {
-  background-color: #1976D2;
+    background-color: #1976D2;
 }
-
 
 
 /* 현재 차례 픽 슬롯 강조 */
 .current-turn {
-  border: 3px solid #FF4500;  /* 주황 테두리 */
-  box-shadow: 0 0 10px 3px rgba(255, 69, 0, 0.7);
-  border-radius: 8px;
-  transition: box-shadow 0.3s ease;
-  /* 배경색도 살짝 넣고 싶으면 추가 가능 */
-  background-color: rgba(255, 69, 0, 0.1);
+    border: 3px solid #FF4500; /* 주황 테두리 */
+    box-shadow: 0 0 10px 3px rgba(255, 69, 0, 0.7);
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+    /* 배경색도 살짝 넣고 싶으면 추가 가능 */
+    background-color: rgba(255, 69, 0, 0.1);
 }
-
 
 
 /* 모달 배경 */
 .modal {
-  display: none; /* 기본 숨김 */
-  position: fixed;
-  z-index: 9999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  overflow: auto;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
 }
 
 /* 모달 내용 박스 */
 .modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 20px 30px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  color: #333;
-  position: relative;
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: #333;
+    position: relative;
 }
 
 /* 닫기 버튼 스타일 */
 .close-button {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #aaa;
-  cursor: pointer;
-  transition: color 0.3s;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s;
 }
+
 .close-button:hover {
-  color: #000;
+    color: #000;
+}
+
+
+.filter-search-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* 검색창 스타일 */
+.champion-search input#champ-search {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    width: 200px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 회색 배경 오버레이 */
+#modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4); /* 어두운 회색 반투명 */
+    z-index: 9998;
+    display: none;
+}
+
+/* 모달 */
+#teamModal {
+    all: unset;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f9f9f9;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    min-width: 280px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#teamModal h2 {
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.choose-team {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    color: white;
+}
+
+.choose-team[data-team="blue"] {
+    background-color: #3b82f6;
+}
+
+.choose-team[data-team="red"] {
+    background-color: #ef4444;
+}
+
+.choose-team[data-team="observer"] {
+    background-color: #6b7280;
+}
+
+.choose-team:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/*선택 순서 효과*/
+.blinking-border {
+    animation: border-blink 1s infinite;
+}
+
+@keyframes border-blink {
+    0% {
+        border: 3px solid red;
+    }
+    50% {
+        border: 3px solid transparent;
+    }
+    100% {
+        border: 3px solid red;
+    }
 }

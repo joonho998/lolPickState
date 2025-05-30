@@ -3,114 +3,128 @@
 <head th:replace="fragments/header :: head('LOL Draft Start')"></head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/main.css">
-  <script src="/js/main.js"></script>
+<script src="/js/main.js"></script>
 <body>
-	<header th:replace="fragments/header :: header"></header>
-	<input type="hidden" id="roomId" name="roomId" th:value="${roomId}">
-	<input type="hidden" id="simulationId" name="simulationId" th:value="${simulationId}">
-	<input type="hidden" id="totalSets" name="totalSets" th:value="${totalSets}">
-	<div id="timer-container" style="text-align:center; font-size: 24px; font-weight: bold; margin-bottom: 20px;">
-	  <button id="start-button">시작</button>
-	  <span id="timer"></span>
-	</div>
-  <!-- 라인 필터 버튼 -->
-  <div id="role-filter">
-    <button data-role="ALL">전체</button>
-    <button data-role="TOP">탑</button>
-    <button data-role="JUNGLE">정글</button>
-    <button data-role="MID">미드</button>
-    <button data-role="ADC">원딜</button>
-    <button data-role="SUPPORT">서폿</button>
-  </div>
+<header th:replace="fragments/header :: header"></header>
+<input type="hidden" id="roomId" name="roomId" th:value="${roomId}">
+<input type="hidden" id="simulationId" name="simulationId" th:value="${simulationId}">
+<input type="hidden" id="totalSets" name="totalSets" th:value="${totalSets}">
+<div id="timer-container" style="text-align:center; font-size: 24px; font-weight: bold; margin-bottom: 20px;">
+    <button id="start-button">시작</button>
+    <span id="timer"></span>
+</div>
+<!-- 라인 필터 버튼 -->
+<div id="filter-search-wrapper">
+    <div id="role-filter">
+        <button data-role="ALL">전체</button>
+        <button data-role="TOP">탑</button>
+        <button data-role="JUNGLE">정글</button>
+        <button data-role="MID">미드</button>
+        <button data-role="ADC">원딜</button>
+        <button data-role="SUPPORT">서폿</button>
 
-  <div class="banpick-container">
+        <!-- 챔피언 검색창 추가 -->
+        <div class="champion-search">
+            <input type="text" id="champ-search" placeholder="챔피언 검색..."/>
+        </div>
+    </div>
+</div>
+
+<div class="banpick-container">
     <!-- 블루팀 -->
     <div class="team blue-team">
-      <div class="ban-row" id="blue-bans">
-      	<img id="blue-ban-1" />
-      	<img id="blue-ban-2" />
-      	<img id="blue-ban-3" />
-      	<img id="blue-ban-4" />
-      	<img id="blue-ban-5" />
-      </div>
-      <div class="pick-row">
-	    <img id="blue-pick-1">
-	    <div class="champion-name" id="blue-name-1"></div>
-	  </div>
-      <div class="pick-row">
-	    <img id="blue-pick-2">
-	    <div class="champion-name" id="blue-name-2"></div>
-	  </div>	  
-      <div class="pick-row">
-	    <img id="blue-pick-3">
-	    <div class="champion-name" id="blue-name-3"></div>
-	  </div>
-      <div class="pick-row">
-	    <img id="blue-pick-4">
-	    <div class="champion-name" id="blue-name-4"></div>
-	  </div>	
-      <div class="pick-row">
-	    <img id="blue-pick-5">
-	    <div class="champion-name" id="blue-name-5"></div>
-	  </div>	    	  
+        <div class="ban-row" id="blue-bans">
+            <img id="blue-ban-1"/>
+            <img id="blue-ban-2"/>
+            <img id="blue-ban-3"/>
+            <img id="blue-ban-4"/>
+            <img id="blue-ban-5"/>
+        </div>
+        <div class="pick-row">
+            <img id="blue-pick-1">
+            <div class="champion-name" id="blue-name-1"></div>
+        </div>
+        <div class="pick-row">
+            <img id="blue-pick-2">
+            <div class="champion-name" id="blue-name-2"></div>
+        </div>
+        <div class="pick-row">
+            <img id="blue-pick-3">
+            <div class="champion-name" id="blue-name-3"></div>
+        </div>
+        <div class="pick-row">
+            <img id="blue-pick-4">
+            <div class="champion-name" id="blue-name-4"></div>
+        </div>
+        <div class="pick-row">
+            <img id="blue-pick-5">
+            <div class="champion-name" id="blue-name-5"></div>
+        </div>
     </div>
 
     <!-- 챔피언 목록 -->
     <div>
-	    <div id="champion-list"></div>
-		<div class="select-button">
-			<button id="select-button">선택</button>
-		</div>    
+        <div id="champion-list"></div>
+        <div class="select-button">
+            <button id="select-button">선택</button>
+        </div>
     </div>
 
     <!-- 레드팀 -->
     <div class="team red-team">
-      <div class="ban-row" id="red-bans">
-      	<img id="red-ban-1" />
-      	<img id="red-ban-2" />
-      	<img id="red-ban-3" />
-      	<img id="red-ban-4" />
-      	<img id="red-ban-5" />
-      </div>
-      <div class="pick-row">
-	    <img id="red-pick-1">
-	    <div class="champion-name" id="red-name-1"></div>
-	  </div>
-      <div class="pick-row">
-	    <img id="red-pick-2">
-	    <div class="champion-name" id="red-name-2"></div>
-	  </div>	  
-      <div class="pick-row">
-	    <img id="red-pick-3">
-	    <div class="champion-name" id="red-name-3"></div>
-	  </div>
-      <div class="pick-row">
-	    <img id="red-pick-4">
-	    <div class="champion-name" id="red-name-4"></div>
-	  </div>	
-      <div class="pick-row">
-	    <img id="red-pick-5">
-	    <div class="champion-name" id="red-name-5"></div>
-	  </div>
+        <div class="ban-row" id="red-bans">
+            <img id="red-ban-1"/>
+            <img id="red-ban-2"/>
+            <img id="red-ban-3"/>
+            <img id="red-ban-4"/>
+            <img id="red-ban-5"/>
+        </div>
+        <div class="pick-row">
+            <img id="red-pick-1">
+            <div class="champion-name" id="red-name-1"></div>
+        </div>
+        <div class="pick-row">
+            <img id="red-pick-2">
+            <div class="champion-name" id="red-name-2"></div>
+        </div>
+        <div class="pick-row">
+            <img id="red-pick-3">
+            <div class="champion-name" id="red-name-3"></div>
+        </div>
+        <div class="pick-row">
+            <img id="red-pick-4">
+            <div class="champion-name" id="red-name-4"></div>
+        </div>
+        <div class="pick-row">
+            <img id="red-pick-5">
+            <div class="champion-name" id="red-name-5"></div>
+        </div>
     </div>
-  </div>
-  
-  <div class="save-button">
-  	<button id="save-draft-btn">저장</button>
-  </div>
-  
-  	<!-- 모달 배경 + 모달 박스 포함 -->
-	<!-- 모달 -->
-	<div id="info-modal" class="modal">
-	  <div class="modal-content">
-	    <span class="close-button">&times;</span>
-	    <h2>안내</h2>
-	    <p>리그 오브 레전드 챔피언 벤픽 시뮬레이터입니다.</p>
-	    <p>-미완성이라 블루,레드 상관없이 챔피언 선택이 가능하므로 <br>팀 순서에 맞춰 벤픽 진행 해주시기 바랍니다.</p>
-	    <p>-개선해야 할 부분 알려주시면 개선 진행하겠습니다!</p>
-	    <p>즐거운 벤픽 하십쇼!</p>
-	  </div>
-	</div>
-  <th:block th:replace="fragments/footer :: footer"></th:block>
+</div>
+
+<div class="save-button">
+    <button id="save-draft-btn">저장</button>
+</div>
+
+<div id="modalOverlay"></div>
+<dialog id="teamModal" style="display:none;">
+    <h2>팀을 선택하세요</h2>
+    <button class="choose-team" data-team="blue">블루팀</button>
+    <button class="choose-team" data-team="red">레드팀</button>
+    <button class="choose-team" data-team="observer">관전자</button>
+</dialog>
+<!-- 모달 배경 + 모달 박스 포함 -->
+<!-- 모달 -->
+<div id="info-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>안내</h2>
+        <p>리그 오브 레전드 챔피언 벤픽 시뮬레이터입니다.</p>
+        <p>-미완성이라 블루,레드 상관없이 챔피언 선택이 가능하므로 <br>팀 순서에 맞춰 벤픽 진행 해주시기 바랍니다.</p>
+        <p>-개선해야 할 부분 알려주시면 개선 진행하겠습니다!</p>
+        <p>즐거운 벤픽 하십쇼!</p>
+    </div>
+</div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
 </html>

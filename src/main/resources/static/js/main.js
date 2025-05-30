@@ -313,7 +313,8 @@ $(document).ready(function () {
         $("#modalOverlay").hide();
         $("#mainContent").show();
         // const socket = new WebSocket("wss://lolpickstate-1.onrender.com/ws/draft?roomId=" + encodeURIComponent(roomId) + "&team=");
-        socket = new WebSocket("ws://localhost:8080/ws/draft?roomId=" + encodeURIComponent(roomId) + "&team=" + encodeURIComponent(selectedTeam));
+        // socket = new WebSocket("ws://localhost:8080/ws/draft?roomId=" + encodeURIComponent(roomId) + "&team=" + encodeURIComponent(selectedTeam));
+        socket = new WebSocket("wss://lolpickstate-1.onrender.com/ws/draft?roomId=" + encodeURIComponent(roomId) + "&team=" + encodeURIComponent(selectedTeam));
         team = $(this).data("team");
         socket.onmessage = (event) => {
             console.log("📨 Message from server:", event.data);

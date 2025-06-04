@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: head('LOL 시뮬레이션 상세')"></head>
 <meta charset="UTF-8">
-<link rel="stylesheet" th:href="@{/css/simulationDetail.css}" />
+<link rel="stylesheet" th:href="@{/css/simulationDetail.css}"/>
 <body>
 <header th:replace="fragments/header :: header"></header>
 
@@ -18,7 +18,8 @@
                     <div class="label">블루 벤픽</div>
                     <div class="champ-row">
                         <th:block th:each="champ : ${set.blueBanList}">
-                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
+                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'"
+                                 th:alt="${champ}">
                         </th:block>
                     </div>
                 </div>
@@ -26,7 +27,8 @@
                     <div class="label">레드 벤픽</div>
                     <div class="champ-row">
                         <th:block th:each="champ : ${set.redBanList}">
-                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
+                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'"
+                                 th:alt="${champ}">
                         </th:block>
                     </div>
                 </div>
@@ -37,7 +39,8 @@
                     <div class="label">블루 픽</div>
                     <div class="champ-row">
                         <th:block th:each="champ : ${set.bluePickList}">
-                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
+                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'"
+                                 th:alt="${champ}">
                         </th:block>
                     </div>
                 </div>
@@ -45,13 +48,17 @@
                     <div class="label">레드 픽</div>
                     <div class="champ-row">
                         <th:block th:each="champ : ${set.redPickList}">
-                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'" th:alt="${champ}">
+                            <img th:src="'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' + ${champ} + '.png'"
+                                 th:alt="${champ}">
                         </th:block>
                     </div>
                 </div>
             </div>
         </div>
     </th:block>
+</div>
+<div class="button-container">
+    <button onclick="history.back()" class="back-button">뒤로가기</button>
 </div>
 
 <th:block th:replace="fragments/footer :: footer"></th:block>

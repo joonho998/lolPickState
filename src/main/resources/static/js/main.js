@@ -346,12 +346,20 @@ $(document).ready(function () {
                 startTimer();              // 타이머 시작
                 timerStarted = true;
             }
-            if (msg.banOrder != null && msg.banOrder === team) {
+            if (null != msg.banOrder && team === msg.banOrder) {
                 $("#champion-list").css({
                     "user-select": "auto",
                     "pointer-events": "auto"
                 });
                 $(`.team.${team}-team`).addClass("blinking-border");
+            } else if ("observer" === team) {
+                $("#champion-list").css({
+                    "user-select": "none",
+                    "pointer-events": "none"
+                });
+                $("#start-button").hide(); // 시작 버튼 숨김
+                $("#select-button").hide(); // 시작 버튼 숨김
+                $(`.team.${msg.banOrder}-team`).addClass("blinking-border");
             } else {
                 $("#champion-list").css({
                     "user-select": "none",
@@ -402,5 +410,32 @@ $(document).ready(function () {
                 modal.style.display = "none";
             }
         };
+    });
+});
+
+
+function playMusic(src) {
+    const audio = document.getElementById("bg-music");
+    audio.pause();
+    audio.src = src;
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function stopMusic() {
+    const audio = document.getElementById("bg-music");
+    audio.pause();
+    audio.currentTime = 0;
+}
+
+
+window.addEventListener("DOMContentLoaded", function () {
+    const audio = document.getElementById("bg-music");
+    const volumeSlider = document.getElementById("volume");
+
+    audio.volume = parseFloat(volumeSlider.value);
+
+    volumeSlider.addEventListener("input", function () {
+        audio.volume = parseFloat(this.value);
     });
 });

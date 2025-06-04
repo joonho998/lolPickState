@@ -351,3 +351,65 @@ body {
         border: 3px solid red;
     }
 }
+
+.button-container {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.back-button {
+    background-color: #00aaff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #008fcc;
+}
+
+
+/* 최상위 컨테이너 */
+.music-player {
+    text-align: center;
+    margin-top: 80px;
+    font-family: Arial, sans-serif;
+}
+
+/* 버튼 묶음 정렬 */
+.music-buttons {
+    margin-bottom: 20px;
+}
+
+/* 곡 선택 버튼 및 음악 끄기 버튼 공통 */
+.music-btn {
+    background-color: #00aaff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.music-btn:hover {
+    background-color: #008fcc;
+}
+
+/* 볼륨 컨트롤 */
+.music-volume {
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+.music-volume input[type="range"] {
+    width: 200px;
+    vertical-align: middle;
+    margin-left: 10px;
+}

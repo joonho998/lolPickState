@@ -3,7 +3,6 @@
 <head th:replace="fragments/header :: head('LOL Draft Start')"></head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/main.css">
-<script src="/js/main.js"></script>
 <body>
 <header th:replace="fragments/header :: header"></header>
 <input type="hidden" id="roomId" name="roomId" th:value="${roomId}">
@@ -68,6 +67,23 @@
         <div class="select-button">
             <button id="select-button">선택</button>
         </div>
+        <div class="music-player">
+            <audio id="bg-music" loop></audio>
+
+            <!-- 곡 선택 버튼들 -->
+            <div class="music-buttons">
+                <button class="music-btn" onclick="playMusic('/audio/banPick.mp3')">🎵 밴픽브금</button>
+                <button class="music-btn" onclick="playMusic('/audio/open.mp3')">🎶 오프닝</button>
+                <button class="music-btn" onclick="playMusic('/audio/team.mp3')">🎼 팀소개</button>
+                <br>
+                <button class="music-btn stop" onclick="stopMusic()">🔇 음악 끄기</button>
+            </div>
+
+            <div class="volume-control music-volume">
+                <label for="volume">🔊 볼륨 조절: </label>
+                <input type="range" id="volume" min="0" max="1" step="0.01" value="0.02">
+            </div>
+        </div>
     </div>
 
     <!-- 레드팀 -->
@@ -105,6 +121,9 @@
 <div class="save-button">
     <button id="save-draft-btn">저장</button>
 </div>
+<div class="button-container">
+    <button onclick="history.back()" class="back-button">뒤로가기</button>
+</div>
 
 <div id="modalOverlay"></div>
 <dialog id="teamModal" style="display:none;">
@@ -122,9 +141,11 @@
         <p>리그 오브 레전드 챔피언 벤픽 시뮬레이터입니다.</p>
         <p>-미완성이라 블루,레드 상관없이 챔피언 선택이 가능하므로 <br>팀 순서에 맞춰 벤픽 진행 해주시기 바랍니다.</p>
         <p>-개선해야 할 부분 알려주시면 개선 진행하겠습니다!</p>
+        <p>-V0.1 -> 시즌3 밴픽 브금 추가</p>
         <p>즐거운 벤픽 하십쇼!</p>
     </div>
 </div>
 <th:block th:replace="fragments/footer :: footer"></th:block>
+<script src="/js/main.js"></script>
 </body>
 </html>

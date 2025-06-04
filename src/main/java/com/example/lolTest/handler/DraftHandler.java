@@ -53,13 +53,14 @@ public class DraftHandler extends TextWebSocketHandler
     @Override
     public void afterConnectionEstablished(final WebSocketSession session) throws Exception
     {
-        if ( this.blueSession == null )
+        String team = getQueryParam(session, "team");
+        if ( "blue".equals(team) )
         {
             this.blueSession = session;
             this.userTeamMap.put(session, "blue");
             session.sendMessage(new TextMessage("{\"type\": \"team\", \"team\": \"blue\"}"));
         }
-        else if ( this.redSession == null )
+        else if ( "red".equals(team) )
         {
             this.redSession = session;
             this.userTeamMap.put(session, "red");
@@ -137,12 +138,12 @@ public class DraftHandler extends TextWebSocketHandler
         String roomId = getQueryParam(session, "roomId");
         String team = getQueryParam(session, "team");
         Set<WebSocketSession> sessionsInRoom = this.roomSessions.get(roomId);
-
         if ( sessionsInRoom != null )
         {
-            sessionsInRoom.remove(session);
             if ( sessionsInRoom.isEmpty() )
             {
+                this.redSession = null;
+                this.blueSession = null;
                 this.currentBanIndex = 0;
                 this.start = false;
                 this.roomSessions.remove(roomId); // 방 비었으면 정리

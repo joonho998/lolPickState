@@ -2,22 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOL Draft</title>
-    <link rel="stylesheet" th:href="@{../../css/common.css}" />
+    <link rel="stylesheet" th:href="@{../../css/common.css}"/>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script th:src="@{../../js/common.js}"></script>
     <title th:text="${title}">블로그</title>
 </head>
-	<header th:fragment="header" class="navbar">
-	    <div class="container">
-	        <div class="logo">LOL Draft</div>
-	        <nav class="nav-menu">
-	            <a href="#">홈</a>
-	            <a href="#">챔피언 분석</a>
-	            <a href="#">통계</a>
-	            <a href="#">랭킹</a>
-	        </nav>
-	    </div>
-	</header>
+<header th:fragment="header" class="navbar">
+    <div class="container">
+        <a href="/main" class="logo">LOL Draft</a>
+        <nav class="nav-menu">
+            <a href="/main">홈</a>
+            <a href="#">챔피언 분석</a>
+            <a href="#">통계</a>
+            <a href="#">랭킹</a>
+        </nav>
+    </div>
+</header>
 </html>
